@@ -35,7 +35,7 @@ El script:
 1. **Clonar el repositorio:**
 
    ```bash
-   git clone [git@github.com:setuid-0/scripts.git](git@github.com:setuid-0/scripts.git)
+   git clone git@github.com:setuid-0/scripts.git
    ```
 
 2. **Navegar al directorio del script:**
