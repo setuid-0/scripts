@@ -12,9 +12,17 @@ Este script en Bash tiene el objetivo de estimar el tiempo de desarrollo y valid
 - [Entendimiento y Criterios Utilizados](#entendimiento-y-criterios-utilizados)
   - [Categorías y Elementos](#categorías-y-elementos)
   - [Tabla de Complejidad](#tabla-de-complejidad)
+    - [Estimar los Tiempos](#estimar-los-tiempos)
+      - [1. Complejidad Alta plus](#1-complejidad-alta-plus)
+      - [2. Complejidad Media plus](#2-complejidad-media-plus)
+      - [3. Complejidad Baja plus](#3-complejidad-baja-plus)
+      - [4. Complejidad Alta](#4-complejidad-alta)
+      - [5. Complejidad Media](#5-complejidad-media)
+      - [6. Complejidad Baja](#6-complejidad-baja)
 - [Interpretación de Resultados](#interpretación-de-resultados)
-- [Elementos de Ansible con Métodos de Validación](#elementos-de-ansible-con-metodos-de-validación)
+- [Elementos de Ansible con Métodos de Validación](#elementos-de-ansible-con-métodos-de-validación)
 - [Licencia](#licencia)
+
 
 ## Descripción General
 
@@ -111,16 +119,156 @@ Se consideran las siguientes **categorías**:
 
 ### Tabla de Complejidad
 
-El nivel de complejidad se determina según la siguiente tabla:
+| **Complejidad Playbook** | **Sistemas** | **Reglas de negocio/ Políticas** | **Integraciones** | **Actividades** | **Tiempo (minutos)** |
+|--------------------------|--------------|----------------------------------|-------------------|-----------------|----------------------|
+| Alta plus                | 4            | 7                                | 3                 | Hasta 8         | **2159**             |
+| Media plus               | 2            | 5                                | 2                 | Hasta 5         | **1345**             |
+| Baja plus                | 1            | 2                                | 1                 | Hasta 3         | **795**              |
+| Alta                     | 4            | 7                                | 0                 | Hasta 8         | **1934**             |
+| Media                    | 2            | 4                                | 0                 | Hasta 5         | **1020**             |
+| Baja                     | 1            | 2                                | 0                 | Hasta 3         | **750**              |
 
-| **Complejidad Playbook** | **Sistemas** | **Reglas de Negocio/Políticas** | **Integraciones** | **Actividades (hasta)** | **Tiempo Máximo (horas)** |
-|--------------------------|--------------|----------------------------------|-------------------|-------------------------|---------------------------|
-| **Alta Plus**            | 4            | 7                                | 3                 | 8                       | 8                         |
-| **Media Plus**           | 2            | 5                                | 2                 | 5                       | 5                         |
-| **Baja Plus**            | 1            | 2                                | 1                 | 3                       | 3                         |
-| **Alta**                 | 4            | 7                                | 0                 | 8                       | 8                         |
-| **Media**                | 2            | 4                                | 0                 | 5                       | 5                         |
-| **Baja**                 | 1            | 2                                | 0                 | 3                       | 3                         |
+
+### Estimar los Tiempos
+
+A continuación, detallo el cálculo del tiempo total para cada nivel de complejidad, considerando el **mayor tiempo posible** basado en los elementos y tiempos estimados previamente.
+
+#### **1. Complejidad Alta plus**
+
+- **Sistemas (4 elementos):**
+  - Implementación en AWX: **330 min**
+  - `ansible.cfg`: **60 min**
+  - Inventario: **50 min**
+  - Configuración Inicial del Proyecto: **45 min**
+  - **Subtotal Sistemas:** 330 + 60 + 50 + 45 = **485 min**
+
+- **Reglas de negocio/Políticas (7 elementos):**
+  - Variables Globales: **60 min**
+  - Variables en Roles (4 roles): 15 min x 4 = **60 min**
+  - Etiquetas: **15 min**
+  - Registro y Tiempos de Ejecución: **25 min**
+  - **Subtotal Reglas:** 60 + 60 + 15 + 25 = **160 min**
+
+- **Integraciones (3 elementos):**
+  - Módulos o Plugins Personalizados (2 módulos): 90 min x 2 = **180 min**
+  - Colecciones: **45 min**
+  - **Subtotal Integraciones:** 180 + 45 = **225 min**
+
+- **Actividades (hasta 8):**
+  - Playbooks (1): 75 min x 1 = **75 min**
+  - Roles (4): 100 min x 4 = **400 min**
+  - Tareas (10 por rol): 8 min x 40 = **320 min**
+  - Plantillas (2 por rol): 30 min x 8 = **240 min**
+  - Manejadores (2 por rol): 15 min x 8 = **120 min**
+  - Archivos Estáticos (2): 7 min x 2 = **14 min**
+  - Pruebas y Validación General: **90 min**
+  - Documentación Interna: **30 min**
+  - **Subtotal Actividades:** 75 + 400 + 320 + 240 + 120 + 14 + 90 + 30 = **1289 min**
+
+- **Tiempo Total Alta plus:** 485 + 160 + 225 + 1289 = **2159 min**
+
+#### **2. Complejidad Media plus**
+
+- **Sistemas (2 elementos):**
+  - Implementación en AWX: **330 min**
+  - `ansible.cfg`: **60 min**
+  - **Subtotal Sistemas:** 330 + 60 = **390 min**
+
+- **Reglas de negocio/Políticas (5 elementos):**
+  - Variables Globales: **60 min**
+  - Variables en Roles (2 roles): 15 min x 2 = **30 min**
+  - Etiquetas: **15 min**
+  - Registro y Tiempos de Ejecución: **25 min**
+  - **Subtotal Reglas:** 60 + 30 + 15 + 25 = **130 min**
+
+- **Integraciones (2 elementos):**
+  - Módulos o Plugins Personalizados (2 módulos): 90 min x 2 = **180 min**
+  - **Subtotal Integraciones:** **180 min**
+
+- **Actividades (hasta 5):**
+  - Playbooks (1): 75 min x 1 = **75 min**
+  - Roles (2): 100 min x 2 = **200 min**
+  - Tareas (10 por rol): 8 min x 20 = **160 min**
+  - Plantillas (2 por rol): 30 min x 4 = **120 min**
+  - Pruebas y Validación General: **90 min**
+  - **Subtotal Actividades:** 75 + 200 + 160 + 120 + 90 = **645 min**
+
+- **Tiempo Total Media plus:** 390 + 130 + 180 + 645 = **1345 min**
+
+#### **3. Complejidad Baja plus**
+
+- **Sistemas (1 elemento):**
+  - Implementación en AWX: **330 min**
+  - **Subtotal Sistemas:** **330 min**
+
+- **Reglas de negocio/Políticas (2 elementos):**
+  - Variables Globales: **60 min**
+  - Variables en Roles (1 rol): 15 min x 1 = **15 min**
+  - **Subtotal Reglas:** 60 + 15 = **75 min**
+
+- **Integraciones (1 elemento):**
+  - Colecciones: **45 min**
+  - **Subtotal Integraciones:** **45 min**
+
+- **Actividades (hasta 3):**
+  - Playbooks (1): 75 min x 1 = **75 min**
+  - Roles (1): 100 min x 1 = **100 min**
+  - Tareas (10 por rol): 8 min x 10 = **80 min**
+  - Pruebas y Validación General: **90 min**
+  - **Subtotal Actividades:** 75 + 100 + 80 + 90 = **345 min**
+
+- **Tiempo Total Baja plus:** 330 + 75 + 45 + 345 = **795 min**
+
+#### **4. Complejidad Alta**
+
+- **Sistemas (4 elementos):**
+  - Igual que en Alta plus: **485 min**
+
+- **Reglas de negocio/Políticas (7 elementos):**
+  - Igual que en Alta plus: **160 min**
+
+- **Integraciones (0 elementos):**
+  - **Subtotal Integraciones:** **0 min**
+
+- **Actividades (hasta 8):**
+  - Igual que en Alta plus: **1289 min**
+
+- **Tiempo Total Alta:** 485 + 160 + 0 + 1289 = **1934 min**
+
+#### **5. Complejidad Media**
+
+- **Sistemas (2 elementos):**
+  - Igual que en Media plus: **390 min**
+
+- **Reglas de negocio/Políticas (4 elementos):**
+  - Variables Globales: **60 min**
+  - Variables en Roles (2 roles): **30 min**
+  - Etiquetas: **15 min**
+  - **Subtotal Reglas:** 60 + 30 + 15 = **105 min**
+
+- **Integraciones (0 elementos):**
+  - **Subtotal Integraciones:** **0 min**
+
+- **Actividades (hasta 5):**
+  - Igual que en Media plus: **525 min**
+
+- **Tiempo Total Media:** 390 + 105 + 0 + 525 = **1020 min**
+
+#### **6. Complejidad Baja**
+
+- **Sistemas (1 elemento):**
+  - Igual que en Baja plus: **330 min**
+
+- **Reglas de negocio/Políticas (2 elementos):**
+  - Igual que en Baja plus: **75 min**
+
+- **Integraciones (0 elementos):**
+  - **Subtotal Integraciones:** **0 min**
+
+- **Actividades (hasta 3):**
+  - Igual que en Baja plus: **345 min**
+
+- **Tiempo Total Baja:** 330 + 75 + 0 + 345 = **750 min**
 
 **Notas:**
 
@@ -146,8 +294,8 @@ El nivel de complejidad se determina según la siguiente tabla:
 - **Recursos:** Permite asignar recursos humanos y técnicos adecuados.
 - **Comunicación:** Facilita la comunicación con equipos y stakeholders sobre el alcance del proyecto.
 
-
-### Elementos de Ansible con Métodos de Validación
+## Elementos de Ansible con Métodos de Validación
+-
 
 | **Categoría**                     | **Elemento**                                     | **Descripción**                                                                                   | **Tiempo de Desarrollo (minutos)** | **Tiempo de Validación (minutos)** | **Tiempo Total (minutos)** | **Cómo se Realiza la Validación (Comandos)**                                                                                                          |
 |-----------------------------------|--------------------------------------------------|---------------------------------------------------------------------------------------------------|------------------------------------|-------------------------------------|----------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------|
