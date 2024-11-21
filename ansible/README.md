@@ -35,13 +35,13 @@ El script:
 1. **Clonar el repositorio:**
 
    ```bash
-   git clone https://github.com/tu_usuario/tu_repositorio.git
+   git clone [git@github.com:setuid-0/scripts.git](git@github.com:setuid-0/scripts.git)
    ```
 
 2. **Navegar al directorio del script:**
 
    ```bash
-   cd tu_repositorio
+   cd scripts/ansible
    ```
 
 3. **Dar permisos de ejecución al script:**
