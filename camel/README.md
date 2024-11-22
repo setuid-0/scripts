@@ -40,6 +40,15 @@ El script realiza las siguientes tareas:
    git clone https://github.com/setuid-0/scripts/
    cd scripts/
 
+2. **Cambiar permisos**:
+   ```bash
+   chmod +x camel-fuse-analizer.sh
+
+3. **Ejecutar camel-fuse-analizer.sh**:
+   El script utiliza una ruta absoluta o debe estar en la misma ruta del código fuente.
+   ```bash
+   ./camel-fuse-analizer.sh <ruta_fuentes_aplicativo>
+
 ### Tabla de Elementos y Ponderaciones
 
 La siguiente tabla detalla los elementos analizados por el script junto con sus ponderaciones. Cada ponderación representa una estimación del tiempo necesario en **horas** para implementar ese componente específico. Por ejemplo, una ponderación de **0,55** corresponde a **33 minutos**, lo que permite utilizar el resultado del script como una referencia del tiempo necesario para desarrollar el aplicativo, sin considerar etapas iniciales como el levantamiento y maduración de requerimientos.
